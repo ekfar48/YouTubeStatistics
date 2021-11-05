@@ -1,8 +1,11 @@
 import os
 import discord
 from discord.ext import commands
-from selenium import webdriver  
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium import webdriver
 
 client = commands.Bot(command_prefix=">",intents=discord.Intents.all())
 
@@ -26,9 +29,12 @@ async def invite(ctx):
     
 @client.command()
 async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
-    options = Options()
-    options.headless = True
-    browser = webdriver.Firefox(options=options)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
     elems = browser.find_elements_by_xpath('//p')
     info = browser.find_element_by_id('YouTubeUserTopInfoWrap')
