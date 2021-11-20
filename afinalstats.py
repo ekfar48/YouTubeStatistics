@@ -39,18 +39,16 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     browser = webdriver.Chrome(service=s, options=chrome_options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
     elems = browser.find_element(By.XPATH,'//p')
-    ###info = browser.find_element(By.ID,'YouTubeUserTopInfoWrap')
-    mass,mass2,mass3 = [],[],[]
     """
+    info = browser.find_element(By.ID,'YouTubeUserTopInfoWrap')
+    mass,mass2,mass3 = [],[],[]
     avatars = browser.find_element(By.XPATH,"//img[@src]")
     for avatar in avatars:
         ava = avatar.get_attribute('src')
         if ava[0:len('https://yt3.ggpht.com/')] == 'https://yt3.ggpht.com/':
             found_ava = ava   
-            """
-    #for elem in elems:
-        #mass.append(elem.text)
-        """
+    for elem in elems:
+        mass.append(elem.text)
     mass2 = info.text.split()
     name = ''
     for elem in mass2:
@@ -75,23 +73,18 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
         """
     browser.quit()
     """
-    ###embed = discord.Embed(title=f'{name}')
-    embed = discord.Embed(title='NAME')
-    ###embed.add_field(name='Created',value=created,inline=False)
+    embed = discord.Embed(title=f'{name}')
+    embed.add_field(name='Created',value=created,inline=False)
     #embed.add_field(name='Status',value=status,inline=False)#style
-    """
     embed.set_thumbnail(url=found_ava)
     embed.add_field(name=mass2[0],value=mass2[1],inline=False)
     embed.add_field(name=mass2[2],value=mass2[3],inline=False)
     embed.add_field(name=mass2[5],value=mass2[6],inline=False)
     embed.add_field(name=mass2[7],value=mass2[8],inline=False)
-    """
-    """
     embed.add_field(name=mass[10],value=mass[9],inline=False)
     embed.add_field(name=mass[12],value=mass[11],inline=False)
     embed.add_field(name=mass[14],value=mass[13],inline=False)
     embed.add_field(name=mass[16],value=mass[15],inline=False)
-    """
     await ctx.send(embed=embed)
     """
     await ctx.send(str(elems))
