@@ -47,10 +47,8 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
         ava = avatar.get_attribute('src')
         if ava[0:len('https://yt3.ggpht.com/')] == 'https://yt3.ggpht.com/':
             found_ava = ava   
-            """
     #for elem in elems:
         #mass.append(elem.text)
-        """
     mass2 = info.text.split()
     name = ''
     for elem in mass2:
