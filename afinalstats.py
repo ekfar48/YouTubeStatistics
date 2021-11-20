@@ -40,11 +40,13 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     elems = browser.find_elements_by_xpath('//p')
     ###info = browser.find_element_by_id('YouTubeUserTopInfoWrap')
     mass,mass2,mass3 = [],[],[]
+    """
     avatars = browser.find_elements_by_xpath("//img[@src]")
     for avatar in avatars:
         ava = avatar.get_attribute('src')
         if ava[0:len('https://yt3.ggpht.com/')] == 'https://yt3.ggpht.com/':
             found_ava = ava   
+            """
     for elem in elems:
         mass.append(elem.text)
         """
@@ -76,7 +78,7 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     embed = discord.Embed(title='NAME')
     ###embed.add_field(name='Created',value=created,inline=False)
     #embed.add_field(name='Status',value=status,inline=False)#style
-    embed.set_thumbnail(url=found_ava)
+    ###embed.set_thumbnail(url=found_ava)
     """
     embed.add_field(name=mass2[0],value=mass2[1],inline=False)
     embed.add_field(name=mass2[2],value=mass2[3],inline=False)
