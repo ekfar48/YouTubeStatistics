@@ -28,7 +28,8 @@ async def invite(ctx):
 async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     options = Options()
     options.headless = True
-    browser = webdriver.Firefox(options=options)
+    options.binary_location = os.environ.get("FIREFOX_BIN")
+    browser = webdriver.Firefox(executable_path=os.environ.get("FIREFOX_DRIVER"),options=options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
     elems = browser.find_elements_by_xpath('//p')
     info = browser.find_element_by_id('YouTubeUserTopInfoWrap')
