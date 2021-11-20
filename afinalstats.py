@@ -4,6 +4,7 @@ from discord.ext import commands
 from selenium import webdriver  
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.firefox.service import Service
 
 
 client = commands.Bot(command_prefix=">",intents=discord.Intents.all())
