@@ -36,7 +36,7 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     s = Service(os.environ.get("CHROMEDRIVER_PATH"))
-    browser = webdriver.Chrome(s, options=chrome_options)
+    browser = webdriver.Chrome(service=s, options=chrome_options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
     elems = browser.find_element(By.XPATH,'//p')
     info = browser.find_element(By.CSS_SELECTOR,'YouTubeUserTopInfoWrap')
