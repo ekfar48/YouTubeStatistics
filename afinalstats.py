@@ -74,7 +74,7 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
 
     ###embed = discord.Embed(title=f'{name}')
     embed = discord.Embed(title='NAME')
-    embed.add_field(name='Created',value=created,inline=False)
+    ###embed.add_field(name='Created',value=created,inline=False)
     #embed.add_field(name='Status',value=status,inline=False)#style
     embed.set_thumbnail(url=found_ava)
     """
