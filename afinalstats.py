@@ -38,7 +38,7 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
     elems = browser.find_element(By.XPATH,'//p')
-    info = browser.find_element(By.ID,'YouTubeUserTopInfoWrap')
+    info = browser.find_element(By.CSS_SELECTOR,'YouTubeUserTopInfoWrap')
     mass,mass2,mass3 = [],[],[]
     avatars = browser.find_element(By.XPATH,"//img[@src]")
     for avatar in avatars:
