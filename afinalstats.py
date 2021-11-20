@@ -31,7 +31,8 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     options = Options()
     options.headless = True
     options.binary_location = os.environ.get("FIREFOX_BIN")
-    browser = webdriver.Firefox(executable_path=os.environ.get("FIREFOX_DRIVER"),options=options)
+    s = Service(os.environ.get("FIREFOX_DRIVER"))
+    browser = webdriver.Firefox(service=s,options=options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
     
     
