@@ -48,8 +48,8 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
         if ava[0:len('https://yt3.ggpht.com/')] == 'https://yt3.ggpht.com/':
             found_ava = ava   
             """
-    for elem in elems:
-        mass.append(elem.text)
+    #for elem in elems:
+        #mass.append(elem.text)
         """
     mass2 = info.text.split()
     name = ''
@@ -89,6 +89,6 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     embed.add_field(name=mass[16],value=mass[15],inline=False)
     await ctx.send(embed=embed)
     """
-    await ctx.send(str(mass))
+    await ctx.send(str(elems.text))
     
 client.run(os.environ['token'])
