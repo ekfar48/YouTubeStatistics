@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands
 from selenium import webdriver  
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+
 
 client = commands.Bot(command_prefix=">",intents=discord.Intents.all())
 
@@ -31,6 +33,8 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     options.binary_location = os.environ.get("FIREFOX_BIN")
     browser = webdriver.Firefox(executable_path=os.environ.get("FIREFOX_DRIVER"),options=options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
+    
+    
     elems = browser.find_elements_by_xpath('//p')
     info = browser.find_element_by_id('YouTubeUserTopInfoWrap')
     mass,mass2,mass3 = [],[],[]
