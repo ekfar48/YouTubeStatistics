@@ -39,16 +39,18 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     browser = webdriver.Chrome(service=s, options=chrome_options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
     elems = browser.find_element(By.XPATH,'//p')
-    """
-    info = browser.find_element(By.ID,'YouTubeUserTopInfoWrap')
+    ###info = browser.find_element(By.ID,'YouTubeUserTopInfoWrap')
     mass,mass2,mass3 = [],[],[]
+    """
     avatars = browser.find_element(By.XPATH,"//img[@src]")
     for avatar in avatars:
         ava = avatar.get_attribute('src')
         if ava[0:len('https://yt3.ggpht.com/')] == 'https://yt3.ggpht.com/':
             found_ava = ava   
+            """
     for elem in elems:
         mass.append(elem.text)
+        """
     mass2 = info.text.split()
     name = ''
     for elem in mass2:
@@ -87,6 +89,6 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     embed.add_field(name=mass[16],value=mass[15],inline=False)
     await ctx.send(embed=embed)
     """
-    await ctx.send(str(elems))
+    await ctx.send(str(mass))
     
 client.run(os.environ['token'])
