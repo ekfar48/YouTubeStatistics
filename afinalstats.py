@@ -37,10 +37,10 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     chrome_options.add_argument("--no-sandbox")
     browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
-    elems = browser.find_elements_by_xpath('//p')
-    info = browser.find_element_by_id('YouTubeUserTopInfoWrap')
+    elems = browser.find_element(By.XPATH,'//p')
+    info = browser.find_element(By.ID,'YouTubeUserTopInfoWrap')
     mass,mass2,mass3 = [],[],[]
-    avatars = browser.find_elements_by_xpath("//img[@src]")
+    avatars = browser.find_element(By.XPATH,"//img[@src]")
     for avatar in avatars:
         ava = avatar.get_attribute('src')
         if ava[0:len('https://yt3.ggpht.com/')] == 'https://yt3.ggpht.com/':
