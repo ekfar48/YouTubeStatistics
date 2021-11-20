@@ -1,12 +1,8 @@
 import os
 import discord
 from discord.ext import commands
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
+from selenium import webdriver  
+from selenium.webdriver.firefox.options import Options
 
 client = commands.Bot(command_prefix=">",intents=discord.Intents.all())
 
@@ -30,25 +26,20 @@ async def invite(ctx):
     
 @client.command()
 async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    s = Service(os.environ.get("CHROMEDRIVER_PATH"))
-    browser = webdriver.Chrome(service=s, options=chrome_options)
+    options = Options()
+    options.headless = True
+    browser = webdriver.Firefox(options=options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
-    elems = browser.find_element(By.XPATH,'//p')
-    ###info = browser.find_element(By.ID,'YouTubeUserTopInfoWrap')
+    elems = browser.find_elements_by_xpath('//p')
+    info = browser.find_element_by_id('YouTubeUserTopInfoWrap')
     mass,mass2,mass3 = [],[],[]
-    """
-    avatars = browser.find_element(By.XPATH,"//img[@src]")
+    avatars = browser.find_elements_by_xpath("//img[@src]")
     for avatar in avatars:
         ava = avatar.get_attribute('src')
         if ava[0:len('https://yt3.ggpht.com/')] == 'https://yt3.ggpht.com/':
             found_ava = ava   
-    #for elem in elems:
-        #mass.append(elem.text)
+    for elem in elems:
+        mass.append(elem.text)
     mass2 = info.text.split()
     name = ''
     for elem in mass2:
@@ -69,10 +60,9 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
                 continue
         if elem == 'APPLY':
             break
-        created += elem + ' '    
-        """
+        created += elem + ' '       
     browser.quit()
-    """
+
     embed = discord.Embed(title=f'{name}')
     embed.add_field(name='Created',value=created,inline=False)
     #embed.add_field(name='Status',value=status,inline=False)#style
@@ -86,7 +76,6 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     embed.add_field(name=mass[14],value=mass[13],inline=False)
     embed.add_field(name=mass[16],value=mass[15],inline=False)
     await ctx.send(embed=embed)
-    """
-    await ctx.send(str(elems.text))
+
     
 client.run(os.environ['token'])
