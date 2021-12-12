@@ -52,7 +52,7 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
             found_ava = ava   
     for elem in elems:
         mass.append(elem.text)
-    mass2 = info.text.split()
+    mass2 = info
     name = ''
     for elem in mass2:
         if elem == 'UPLOADS':
@@ -76,7 +76,7 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     browser.quit()
 
     embed = discord.Embed(title=f'{name}')
-    embed.add_field(name='Created',value=created,inline=False)
+    embed.add_field(name='CREATED',value=created,inline=False)
     #embed.add_field(name='Status',value=status,inline=False)#style
     embed.set_thumbnail(url=found_ava)
     embed.add_field(name=mass2[0],value=mass2[1],inline=False)
