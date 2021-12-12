@@ -1,11 +1,8 @@
 import os
 import discord
 from discord.ext import commands
-from selenium import webdriver  
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-from selenium.webdriver.firefox.service import Service
-
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 client = commands.Bot(command_prefix=">",intents=discord.Intents.all())
 
@@ -29,14 +26,20 @@ async def invite(ctx):
     
 @client.command()
 async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
-    options = Options()
-    options.headless = True
-    options.binary_location = os.environ.get("FIREFOX_BIN")
-    s = Service(os.environ.get("FIREFOX_DRIVER"))
-    browser = webdriver.Firefox(service=s,options=options)
+    options = webdriver.ChromeOptions()
+    #options.headless = True
+    #options.add_experimental_option("debuggerAddress", "localhost:9222")
+    #browser = webdriver.Chrome("C:\\Users\\ekfar\\Desktop\\progiekfara\\chromedriver.exe", options=options)
+    #C:\Users\ekfar\Desktop\progiekfara
+
+    #Heroku
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
     browser.get(f'https://socialblade.com/youtube/channel/{channel}')
-    
-    
     elems = browser.find_elements_by_xpath('//p')
     info = browser.find_element_by_id('YouTubeUserTopInfoWrap')
     mass,mass2,mass3 = [],[],[]
@@ -83,6 +86,5 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     embed.add_field(name=mass[14],value=mass[13],inline=False)
     embed.add_field(name=mass[16],value=mass[15],inline=False)
     await ctx.send(embed=embed)
-
     
 client.run(os.environ['token'])
