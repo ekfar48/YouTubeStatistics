@@ -75,6 +75,9 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
             break
         created += elem + ' '       
     browser.quit()
+    print(mass)
+    print('---'*20)
+    print(mass2)
 
     embed = discord.Embed(title=f'{name}')
     embed.add_field(name='CREATED',value=created,inline=False)
