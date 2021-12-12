@@ -46,6 +46,7 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
     info = browser.find_elements_by_id('YouTubeUserTopInfo')
     mass,mass2,mass3 = [],[],[]
     avatars = browser.find_elements_by_xpath("//img[@src]")
+    found_ava = ''
     for avatar in avatars:
         ava = avatar.get_attribute('src')
         if ava[0:len('https://yt3.ggpht.com/')] == 'https://yt3.ggpht.com/':
