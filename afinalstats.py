@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from fake_useragent import UserAgent
 
 client = commands.Bot(command_prefix=">",intents=discord.Intents.all())
 
@@ -34,9 +35,10 @@ async def state(ctx,*,channel = 'UCWzK3Y8YMBNuCpNLyI2afpQ'):
 
     #Heroku
     chrome_options = webdriver.ChromeOptions()
+    ua = UserAgent()
     prefs = {"profile.default_content_setting_values.notifications" : 2}
     chrome_options.add_experimental_option("prefs",prefs)
-    chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36")
+    chrome_options.add_argument(f"user-agent={ua.chrome}")
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
